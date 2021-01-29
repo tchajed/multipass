@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Canonical, Ltd.
+ * Copyright (C) 2019-2021 Canonical, Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,8 +40,8 @@ struct MockVirtualMachine : public multipass::VirtualMachine
     }
 
     MOCK_METHOD0(start, void());
-    MOCK_METHOD0(stop, void());
-    MOCK_METHOD0(shutdown, void());
+    MOCK_METHOD1(stop, void(bool));
+    MOCK_METHOD1(shutdown, void(bool));
     MOCK_METHOD0(suspend, void());
     MOCK_METHOD0(current_state, multipass::VirtualMachine::State());
     MOCK_METHOD0(ssh_port, int());
