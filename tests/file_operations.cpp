@@ -20,6 +20,7 @@
 #include "file_operations.h"
 #include "path.h"
 
+#include <QDir>
 #include <QFile>
 
 namespace mpt = multipass::test;
@@ -51,6 +52,10 @@ qint64 mpt::make_file_with_content(const QString& file_name, const std::string& 
     QFile file(file_name);
     if (file.exists())
         throw std::runtime_error("test file already exists");
+
+    QDir file_dir = QFileInfo(file).absoluteDir();
+    if (!file_dir.exists())
+        file_dir.mkpath(file_dir.absolutePath());
 
     if (!file.open(QFile::WriteOnly))
         throw std::runtime_error("failed to open test file");
